@@ -42,8 +42,15 @@ class Book(models.Model):
 
 class Review(models.Model):
     book = models.OneToOneField(Book,on_delete=models.CASCADE,primary_key=True)
-    comment=models.TextField('리뷰',max_length=100)
+    book_review=models.TextField('리뷰',max_length=100)
     rate=models.IntegerField(
         '별점',
         validators=[MinValueValidator(1),MaxValueValidator(5)],
         default=1)
+
+
+class Comment(models.Model):
+    objects = models.Manager()
+    post = models.ForeignKey('Review', on_delete=models.CASCADE)
+    text = models.TextField(default='')
+    created_date = models.DateTimeField(default=timezone.now)

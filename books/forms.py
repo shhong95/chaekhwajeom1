@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book, Review
+from .models import Book, Review, Comment
 from .widgets import starWidget
 
 class BookForm(forms.ModelForm):
@@ -14,3 +14,8 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rate': starWidget,
         }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text"]
